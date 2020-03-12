@@ -19,7 +19,7 @@ function TopTitle() {
   return (
     <React.Fragment>
       <Toolbar>
-        <Grid justify="space-between" container>
+        <Grid xs={12} justify="space-between" container>
           <Grid item></Grid>
           <Grid item>
             <Typography
