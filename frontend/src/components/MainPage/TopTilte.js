@@ -19,9 +19,9 @@ function TopTitle() {
   return (
     <React.Fragment>
       <Toolbar>
-        <Grid xs={12} justify="space-between" container>
-          <Grid item></Grid>
-          <Grid item>
+        <Grid item={true} xs={12} justify="space-between" container>
+          <Grid item={true}></Grid>
+          <Grid item={true}>
             <Typography
               component="h2"
               variant="h5"
@@ -33,7 +33,7 @@ function TopTitle() {
               AlgoStudy
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid item={true}>
             <Button
               variant="outlined"
               size="small"

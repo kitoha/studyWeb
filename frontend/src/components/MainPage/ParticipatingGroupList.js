@@ -15,7 +15,7 @@ function createData(number) {
   return { number };
 }
 
-function ParticipatingGroupList() {
+function ParticipatingGroupList(props) {
   const [dense, setDense] = React.useState(false);
   const rows = [
     createData(1),
@@ -26,7 +26,7 @@ function ParticipatingGroupList() {
   ];
 
   return (
-    <Grid item xs={12} md={6}>
+    <Grid item={true} xs={12} md={6}>
       <TableContainer
         style={{
           marginTop: 30,
@@ -40,20 +40,23 @@ function ParticipatingGroupList() {
       >
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
-            <TableRow
-              style={{
-                backgroundColor: "#f5f5f5",
-                height: "35px"
-              }}
-            >
-              <TableCell>참여한 스터디 그룹</TableCell>
+            <TableRow>
+              <TableCell
+                style={{
+                  backgroundColor: "#CC99FF",
+                  height: "25px",
+                  fontWeight: "bold"
+                }}
+              >
+                {props.post.title}
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {rows.map(row => (
-              <TableRow hover key={row.number}>
+              <TableRow hover key={props.post.key + row.number}>
                 <TableCell component="th" scope="row">
-                  {row.number}
+                  {props.post.key + row.number}
                 </TableCell>
               </TableRow>
             ))}
