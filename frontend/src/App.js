@@ -8,7 +8,7 @@ function App() {
     <BrowserRouter>
       <div>
         <Route exact path="/" component={Home}></Route>
-        <Route path="/table" component={ProblemTable}></Route>
+        <Route path="/table/:tableName" component={ProblemTable}></Route>
       </div>
     </BrowserRouter>
   );

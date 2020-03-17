@@ -9,14 +9,12 @@ import {
   TableContainer
 } from "@material-ui/core";
 import Paper from "@material-ui/core/Paper";
-import { makeStyles } from "@material-ui/core/styles";
 
 function createData(number) {
   return { number };
 }
 
 function ParticipatingGroupList(props) {
-  const [dense, setDense] = React.useState(false);
   const rows = [
     createData(1),
     createData(2),

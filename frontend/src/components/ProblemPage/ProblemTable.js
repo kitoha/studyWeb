@@ -81,7 +81,7 @@ const useStyles = makeStyles(theme => ({
 
 function ProblemTable(props) {
   const classes = useStyles();
-  const { tableName } = props;
+  const tableName = props.match.params.tableName;
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("name");
   const [page, setPage] = React.useState(0);
@@ -112,11 +112,11 @@ function ProblemTable(props) {
             display="block"
             align="left"
           >
-            구현
+            {tableName}
           </Typography>
         </Box>
 
-        <TableContainer style={{ overflow: "hidden" }}>
+        <TableContainer style={{ overflow: "hidden", border: "1px solid" }}>
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
               <TableRow>

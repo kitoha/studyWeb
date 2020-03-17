@@ -1,18 +1,18 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import { Link } from "react-router-dom";
 import {
   Container,
   Grid,
   Card,
   Typography,
-  CardActions,
-  CardContent,
-  Button
+  CardMedia,
+  CardActionArea,
+  CardContent
 } from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
   card: {
-    backgroundColor: "#cce0ff",
     height: "100%",
     display: "flex",
     flexDirection: "column"
@@ -23,6 +23,9 @@ const useStyles = makeStyles(theme => ({
   },
   cardContent: {
     flexGrow: 1
+  },
+  media: {
+    height: 200
   }
 }));
 
@@ -46,18 +49,22 @@ function ProblemKindCards() {
       <Grid container spacing={1}>
         {numbers.map(number => (
           <Grid item={true} key={number} xs={12} sm={6} md={4}>
-            <Card className={classes.card} raised={true}>
-              <CardContent className={classes.cardContent}>
-                <Typography gutterBottom variant="h5" component="h2">
-                  {cards[number]}
-                </Typography>
-              </CardContent>
-              <CardActions>
-                <Button size="small" color="primary">
-                  Go!
-                </Button>
-              </CardActions>
-            </Card>
+            <Link to={`/table/${cards[number]}`}>
+              <Card className={classes.card} raised={true}>
+                <CardActionArea>
+                  <CardMedia
+                    className={classes.media}
+                    image={require("../../image/title.jpg")}
+                    title={cards[number]}
+                  />
+                  <CardContent className={classes.cardContent}>
+                    <Typography gutterBottom component="h1">
+                      {cards[number]}
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
+              </Card>
+            </Link>
           </Grid>
         ))}
       </Grid>
