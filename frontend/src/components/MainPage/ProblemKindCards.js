@@ -30,13 +30,15 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const cards = [
-  "구현",
-  "그리디",
-  "동적계획법",
-  "그래프",
-  "정렬",
-  "기하",
-  "수학"
+  "brute force",
+  "data structures",
+  "implementation",
+  "greedy",
+  "dp",
+  "graphs",
+  "sortings",
+  "geometry",
+  "math"
 ];
 
 const numbers = [0, 1, 2, 3, 4, 5, 6];

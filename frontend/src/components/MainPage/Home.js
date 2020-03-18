@@ -2,6 +2,7 @@ import React from "react";
 import TopTitle from "./TopTilte";
 import ParticipatingGroupList from "./ParticipatingGroupList";
 import ProblemKindCards from "./ProblemKindCards";
+import RecruitingGroupList from "./RecruitingGroupList";
 import { Container, Grid } from "@material-ui/core";
 
 function MainPage() {
@@ -21,12 +22,11 @@ function MainPage() {
       <Container maxWidth="lg">
         <TopTitle></TopTitle>
         <Grid item={true} container spacing={1}>
-          {[0, 1].map(result => (
-            <ParticipatingGroupList
-              key={result}
-              post={posts[result]}
-            ></ParticipatingGroupList>
-          ))}
+          <ParticipatingGroupList
+            key="1"
+            post={posts[0]}
+          ></ParticipatingGroupList>
+          <RecruitingGroupList key="2" post={posts[1]}></RecruitingGroupList>
         </Grid>
         <ProblemKindCards></ProblemKindCards>
       </Container>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Grid,
@@ -14,12 +14,13 @@ import {
   Container,
   Box
 } from "@material-ui/core";
+import axios from "axios";
 
 function createData(problemName, rating, solved) {
   return {
     name: problemName,
     rating: rating,
-    solved: solved
+    type: solved
   };
 }
 
@@ -60,7 +61,7 @@ function stableSort(array, comparator) {
 }
 
 const headCells = [
-  { id: "name", label: "문제번호" },
+  { id: "name", label: "문제이름" },
   { id: "rating", label: "난이도" },
   { id: "solved", label: "상태" }
 ];
@@ -82,10 +83,19 @@ const useStyles = makeStyles(theme => ({
 function ProblemTable(props) {
   const classes = useStyles();
   const tableName = props.match.params.tableName;
-  const [order, setOrder] = React.useState("asc");
-  const [orderBy, setOrderBy] = React.useState("name");
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [order, setOrder] = useState("asc");
+  const [orderBy, setOrderBy] = useState("name");
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(50);
+  const [row, setRow] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(`https://codeforces.com/api/problemset.problems?tags=${tableName}`)
+      .then(response => {
+        setRow(response.data.result.problems);
+      });
+  }, []);
 
   function requestSortTable(property) {
     const isAsc = orderBy === property && order === "asc" ? "desc" : "asc";
@@ -102,6 +112,35 @@ function ProblemTable(props) {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
+  let table;
+
+  if (row == []) {
+    table = (
+      <TableBody>
+        <TableCell></TableCell>
+      </TableBody>
+    );
+  } else {
+    table = (
+      <TableBody>
+        {stableSort(row, getComparator(order, orderBy))
+          .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+          .map((row, index) => (
+            <TableRow
+              style={
+                index % 2 ? { background: "#E2E2E2" } : { background: "white" }
+              }
+              hover
+              key={row.contestId + row.index}
+            >
+              <TableCell>{row.name}</TableCell>
+              <TableCell>{row.rating}</TableCell>
+              <TableCell>{row.type}</TableCell>
+            </TableRow>
+          ))}
+      </TableBody>
+    );
+  }
 
   return (
     <Container style={{ marginTop: 50 }} maxWidth="lg">
@@ -115,7 +154,6 @@ function ProblemTable(props) {
             {tableName}
           </Typography>
         </Box>
-
         <TableContainer style={{ overflow: "hidden", border: "1px solid" }}>
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
@@ -125,7 +163,8 @@ function ProblemTable(props) {
                     style={{
                       backgroundColor: "#CC99FF",
                       height: "25px",
-                      fontWeight: "bold"
+                      fontWeight: "bold",
+                      color: "white"
                     }}
                     key={headCell.id}
                     sortDirection={orderBy === headCell.id ? order : false}
@@ -148,23 +187,13 @@ function ProblemTable(props) {
                 ))}
               </TableRow>
             </TableHead>
-            <TableBody>
-              {stableSort(rows, getComparator(order, orderBy))
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map(row => (
-                  <TableRow hover key={row.rating}>
-                    <TableCell>{row.name}</TableCell>
-                    <TableCell>{row.rating}</TableCell>
-                    <TableCell>{row.solved}</TableCell>
-                  </TableRow>
-                ))}
-            </TableBody>
+            {table}
           </Table>
         </TableContainer>
         <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
+          rowsPerPageOptions={[50, 200, 300]}
           component="div"
-          count={rows.length}
+          count={row.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onChangePage={handleChangePage}
