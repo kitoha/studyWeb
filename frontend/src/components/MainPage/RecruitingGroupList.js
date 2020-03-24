@@ -11,6 +11,7 @@ import {
   Typography
 } from "@material-ui/core";
 import Paper from "@material-ui/core/Paper";
+import InputGroupInfoDialog from "./InputGroupInfoDialog";
 
 function createData(number) {
   return { number };
@@ -49,14 +50,7 @@ function RecruitingGroupList(props) {
                 }}
               >
                 {props.post.title}
-                <Button
-                  align="right"
-                  variant="contained"
-                  color="primary"
-                  href="#contained-buttons"
-                >
-                  등록
-                </Button>
+                <InputGroupInfoDialog></InputGroupInfoDialog>
               </TableCell>
             </TableRow>
           </TableHead>
