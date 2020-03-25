@@ -16,24 +16,6 @@ import {
 } from "@material-ui/core";
 import axios from "axios";
 
-function createData(problemName, rating, solved) {
-  return {
-    name: problemName,
-    rating: rating,
-    type: solved
-  };
-}
-
-const rows = [
-  createData("Div713", 710, "NO"),
-  createData("Div711", 711, "YES"),
-  createData("Div710", 712, "NO"),
-  createData("Div713", 713, "YES"),
-  createData("Div714", 714, "NO"),
-  createData("Div715", 715, "YES"),
-  createData("Div716", 716, "YES")
-];
-
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
     return -1;
