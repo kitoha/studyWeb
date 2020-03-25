@@ -21,12 +21,12 @@ public class UserGroup {
     @Column(columnDefinition = "TEXT",nullable = false)
     private String content;
 
-    private String roomId;
+    private Long roomId;
 
     private String author;
 
     @Builder
-    public UserGroup(String title,String content,String author, String roomId){
+    public UserGroup(String title,String content,String author, Long roomId){
         this.title=title;
         this.content=content;
         this.author=author;

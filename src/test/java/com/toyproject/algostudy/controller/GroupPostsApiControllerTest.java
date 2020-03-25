@@ -45,7 +45,7 @@ public class GroupPostsApiControllerTest {
                 .title(title)
                 .content(content)
                 .author("author")
-                .roomId("123")
+                .roomId(123L)
                 .build();
 
         String url="http://localhost:"+port+"/api/v2/posts";

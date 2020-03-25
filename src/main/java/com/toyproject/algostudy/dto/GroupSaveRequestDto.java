@@ -14,10 +14,10 @@ public class GroupSaveRequestDto {
     private String title;
     private String content;
     private String author;
-    private String roomId;
+    private Long roomId;
 
     @Builder
-    public GroupSaveRequestDto(String title,String content,String author,String roomId) {
+    public GroupSaveRequestDto(String title,String content,String author,Long roomId) {
         this.title = title;
         this.content = content;
         this.author = author;
