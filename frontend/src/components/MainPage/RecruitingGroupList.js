@@ -6,9 +6,7 @@ import {
   TableRow,
   TableCell,
   TableBody,
-  TableContainer,
-  Button,
-  Typography
+  TableContainer
 } from "@material-ui/core";
 import Paper from "@material-ui/core/Paper";
 import InputGroupInfoDialog from "./InputGroupInfoDialog";

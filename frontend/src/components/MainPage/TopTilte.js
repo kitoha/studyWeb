@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Typography } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
   toolbarTitle: {
@@ -34,13 +35,15 @@ function TopTitle() {
             </Typography>
           </Grid>
           <Grid item={true}>
-            <Button
-              variant="outlined"
-              size="small"
-              style={{ fontWeight: "bold", marginRight: 10 }}
-            >
-              로그인
-            </Button>
+            <Link to={"/signIn"}>
+              <Button
+                variant="outlined"
+                size="small"
+                style={{ fontWeight: "bold", marginRight: 10 }}
+              >
+                로그인
+              </Button>
+            </Link>
           </Grid>
         </Grid>
       </Toolbar>

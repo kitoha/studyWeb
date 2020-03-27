@@ -4,18 +4,12 @@ import {
   Dialog,
   DialogTitle,
   DialogContent,
-  DialogContentText,
   DialogActions,
   Button,
   TextField,
   Typography
 } from "@material-ui/core";
 
-const tableInfos = [
-  { id: "groupName", title: "그룹명" },
-  { id: "title", title: "제목" },
-  { id: "작성자", title: "author" }
-];
 function InputGroupInfoDialog() {
   const [open, setOpen] = useState(false);
   const [groupName, setGroupName] = useState("");
