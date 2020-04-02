@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/v2")
+@RequestMapping("/api/v1")
 public class MainPageController {
     @Autowired
     SolvedProblemCheckService solvedProblemCheckService;

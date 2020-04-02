@@ -1,5 +1,6 @@
 package com.toyproject.algostudy.domain.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.toyproject.algostudy.domain.BaseTimeEntity;
 import lombok.Builder;
 import lombok.Getter;
@@ -21,23 +22,18 @@ public class User extends BaseTimeEntity {
     @Column(nullable = false)
     private String email;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private Role role;
+    @JsonIgnore
+    private String password;
 
     @Builder
-    public User(String name,String email,Role role){
+    public User(String name,String email,String password){
         this.name=name;
         this.email=email;
-        this.role=role;
+        this.password=password;
     }
 
     public User update(String name){
         this.name=name;
         return this;
-    }
-
-    public String getRoleKey(){
-        return this.role.getKey();
     }
 }
