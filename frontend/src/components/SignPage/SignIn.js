@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function SignIn() {
+function SignIn(props) {
   const classes = useStyles();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -35,6 +35,23 @@ function SignIn() {
     setPassword(e.target.value);
   };
 
+  const testButton = () => {
+    axios
+      .get("http://localhost:8080/test", {
+        headers: {
+          Authorization:
+            "Bearer " +
+            "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTg1NDU3NTE3LCJleHAiOjE1ODYwNTc1MTd9.igJxnxIZxneVKdSZWmDg8u-QitBAXN8TwVmXshfuiOSQ-5N8WSug1l8huqYNbNRAfmELEnBKryXs-5Mw8MPZkw"
+        }
+      })
+      .then(response => {
+        console.log("success");
+      })
+      .catch(error => {
+        console.log("error");
+      });
+  };
+
   const submitLogin = () => {
     console.log(email + " " + password);
     axios
@@ -45,7 +62,15 @@ function SignIn() {
       .then(response => {
         console.log("success login");
         console.log(response.data.accessToken);
-        localStorage.setItem("accessToken", response.data.accessToken);
+        localStorage.setItem(
+          "userInfo",
+          JSON.stringify({
+            email: email,
+            token: response.data.accessToken
+          })
+        );
+
+        props.history.push("/");
       })
       .catch(error => {
         console.log("error");
@@ -115,6 +140,17 @@ function SignIn() {
               </Link>
             </Grid>
           </Grid>
+
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+            onClick={testButton}
+          >
+            test
+          </Button>
         </div>
       </Grid>
     </Grid>

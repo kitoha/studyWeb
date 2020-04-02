@@ -16,6 +16,7 @@ public class GroupSaveRequestDto {
     private String author;
     private Long roomId;
 
+
     @Builder
     public GroupSaveRequestDto(String title,String content,String author,Long roomId) {
         this.title = title;

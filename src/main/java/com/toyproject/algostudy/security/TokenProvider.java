@@ -22,7 +22,7 @@ public class TokenProvider {
         UserPrincipal userPrincipal=(UserPrincipal)authentication.getPrincipal();
 
         Date now=new Date();
-        Date expireDate=new Date(now.getTime()+600000000);
+        Date expireDate=new Date(now.getTime()+3600000);
 
         return Jwts.builder()
                 .setSubject(Long.toString(userPrincipal.getId()))
