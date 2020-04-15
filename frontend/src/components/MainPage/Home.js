@@ -1,5 +1,5 @@
 import React from "react";
-import TopTitle from "./TopTilte";
+import TopTitleContainer from "../containers/TopTitleContainer";
 import ParticipatingGroupList from "./ParticipatingGroupList";
 import ProblemKindCards from "./ProblemKindCards";
 import RecruitingGroupList from "./RecruitingGroupList";
@@ -20,13 +20,13 @@ function MainPage() {
   return (
     <React.Fragment>
       <Container maxWidth="lg">
-        <TopTitle></TopTitle>
+        <TopTitleContainer></TopTitleContainer>
         <Grid item={true} container spacing={1}>
           <ParticipatingGroupList
             key="1"
             post={posts[0]}
           ></ParticipatingGroupList>
-          <RecruitingGroupList key="2" post={posts[1]}></RecruitingGroupList>
+          <RecruitingGroupList key="2"></RecruitingGroupList>
         </Grid>
         <ProblemKindCards></ProblemKindCards>
       </Container>

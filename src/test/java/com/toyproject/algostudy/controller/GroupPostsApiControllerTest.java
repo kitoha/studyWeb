@@ -44,8 +44,7 @@ public class GroupPostsApiControllerTest {
         GroupSaveRequestDto requestDto= GroupSaveRequestDto.builder()
                 .title(title)
                 .content(content)
-                .author("author")
-                .roomId(123L)
+                .reader("reader")
                 .build();
 
         String url="http://localhost:"+port+"/api/v2/posts";

@@ -18,21 +18,22 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function TopTitle() {
+const TopTitle = ({ oauthToken, onSignOut }) => {
   const classes = useStyles();
-  const [token, setToken] = useState(null);
+  const token = oauthToken;
 
+  console.log(oauthToken);
   const logOutOperation = () => {
-    localStorage.removeItem("userInfo");
-    setToken(null);
+    window.sessionStorage.clear();
+    onSignOut();
   };
 
-  useEffect(() => {
-    const getToken = localStorage.getItem("userInfo")
-      ? JSON.parse(localStorage.getItem("userInfo")).token
+  /*useEffect(() => {
+    const getToken = window.sessionStorage.getItem("userInfo")
+      ? JSON.parse(window.sessionStorage.getItem("userInfo")).token
       : null;
     setToken(getToken);
-  });
+  }, []);*/
 
   let loginButton;
 
@@ -52,7 +53,7 @@ function TopTitle() {
     loginButton = (
       <Toolbar>
         <Typography className={classes.userLoginName}>
-          {JSON.parse(localStorage.getItem("userInfo")).email}
+          {JSON.parse(window.sessionStorage.getItem("userInfo")).email}
         </Typography>
         <Button
           variant="outlined"
@@ -96,6 +97,6 @@ function TopTitle() {
       </Toolbar>
     </React.Fragment>
   );
-}
+};
 
 export default TopTitle;

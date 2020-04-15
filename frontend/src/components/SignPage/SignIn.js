@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function SignIn(props) {
+const SignIn = ({ onSignIn, history }) => {
   const classes = useStyles();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -41,7 +41,7 @@ function SignIn(props) {
         headers: {
           Authorization:
             "Bearer " +
-            "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTg1NDU3NTE3LCJleHAiOjE1ODYwNTc1MTd9.igJxnxIZxneVKdSZWmDg8u-QitBAXN8TwVmXshfuiOSQ-5N8WSug1l8huqYNbNRAfmELEnBKryXs-5Mw8MPZkw"
+            JSON.parse(window.sessionStorage.getItem("userInfo")).token
         }
       })
       .then(response => {
@@ -60,9 +60,7 @@ function SignIn(props) {
         password: password
       })
       .then(response => {
-        console.log("success login");
-        console.log(response.data.accessToken);
-        localStorage.setItem(
+        window.sessionStorage.setItem(
           "userInfo",
           JSON.stringify({
             email: email,
@@ -70,10 +68,11 @@ function SignIn(props) {
           })
         );
 
-        props.history.push("/");
+        onSignIn(response.data.accessToken);
+        history.push("/");
       })
       .catch(error => {
-        console.log("error");
+        console.log(error);
       });
   };
   return (
@@ -155,6 +154,6 @@ function SignIn(props) {
       </Grid>
     </Grid>
   );
-}
+};
 
 export default SignIn;

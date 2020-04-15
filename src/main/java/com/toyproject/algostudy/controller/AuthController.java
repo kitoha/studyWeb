@@ -1,5 +1,6 @@
 package com.toyproject.algostudy.controller;
 
+import com.toyproject.algostudy.domain.UserGroup;
 import com.toyproject.algostudy.domain.user.User;
 import com.toyproject.algostudy.dto.LoginRequest;
 import com.toyproject.algostudy.dto.SignUpRequest;
@@ -20,6 +21,10 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Slf4j
 @RestController

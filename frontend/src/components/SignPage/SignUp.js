@@ -44,6 +44,14 @@ function SignUp() {
       .then(response => {
         console.log("success");
         console.log(response.data);
+        window.sessionStorage.setItem(
+          "userInfo",
+          JSON.stringify({
+            email: email,
+            name: name,
+            token: response.data
+          })
+        );
       })
       .catch(error => {
         console.log("error");

@@ -27,11 +27,21 @@ function InputGroupInfoDialog() {
 
   const submitGroupInfo = () => {
     axios
-      .post("http://localhost:8080/api/v2/posts", {
-        title: groupName,
-        content: title,
-        author: author
-      })
+      .post(
+        "http://localhost:8080/api/v1/posts",
+        {
+          title: groupName,
+          content: title,
+          reader: author
+        },
+        {
+          headers: {
+            Authorization:
+              "Bearer " +
+              JSON.parse(window.sessionStorage.getItem("userInfo")).token
+          }
+        }
+      )
       .then(response => {
         console.log(response.data);
         setOpen(false);

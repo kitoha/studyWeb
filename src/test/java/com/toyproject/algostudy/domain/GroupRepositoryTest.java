@@ -31,7 +31,7 @@ public class GroupRepositoryTest {
         groupRepository.save(UserGroup.builder()
         .title(title)
         .content(content)
-        .author("테스트")
+        .reader("테스트")
         .build());
 
         List<UserGroup> userGroupList= groupRepository.findAll();
