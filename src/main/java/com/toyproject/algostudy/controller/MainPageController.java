@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RequiredArgsConstructor
 @RestController
@@ -36,5 +37,10 @@ public class MainPageController {
     @GetMapping("/allGroups")
     public List<UserGroup> getAllUserGroup(){
         return groupListService.getAllGroupList();
+    }
+
+    @GetMapping("/participatingGroup/{email}")
+    public Set<UserGroup> getParticipingGroup(@PathVariable("email") String email){
+        return groupListService.getParticipatingGroupList(email);
     }
 }

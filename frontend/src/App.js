@@ -1,7 +1,6 @@
 import React from "react";
 import Home from "./components/mainpage/Home";
 import ProblemTable from "./components/problemPage/ProblemTable";
-import SignInContainer from "./components/containers/SignInContainer";
 import SignUp from "./components/signPage/SignUp";
 import SignIn from "./components/signPage/SignIn";
 import { Route, BrowserRouter } from "react-router-dom";

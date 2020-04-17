@@ -5,7 +5,7 @@ export const login = oAuthToken => ({ type: LOGIN, oAuthToken });
 export const logout = () => ({ type: LOGOUT });
 
 const initialState = {
-  oAuthToken: ""
+  oAuthToken: null
 };
 
 function oAuthTokenReducer(state = initialState, action) {
@@ -17,7 +17,8 @@ function oAuthTokenReducer(state = initialState, action) {
       };
     case LOGOUT:
       return {
-        state
+        ...state,
+        oAuthToken: null
       };
     default:
       return state;

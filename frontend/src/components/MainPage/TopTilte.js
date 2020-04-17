@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Toolbar from "@material-ui/core/Toolbar";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import * as Actions from "../modules/OauthTokenReducer";
 
 const useStyles = makeStyles(theme => ({
   toolbarTitle: {
@@ -18,24 +20,30 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const TopTitle = ({ oauthToken, onSignOut }) => {
+const TopTitle = () => {
   const classes = useStyles();
-  const token = oauthToken;
+  const [token, setToken] = useState(
+    useSelector(state => state.oauthTokenReducer.oAuthToken)
+  );
+  const dispatch = useDispatch();
+  const onSignOut = useCallback(() => dispatch(Actions.logout()), [dispatch]);
 
-  console.log(oauthToken);
   const logOutOperation = () => {
     window.sessionStorage.clear();
+    setToken(null);
     onSignOut();
   };
 
-  /*useEffect(() => {
+  let loginButton;
+
+  useEffect(() => {
+    console.log("test");
     const getToken = window.sessionStorage.getItem("userInfo")
       ? JSON.parse(window.sessionStorage.getItem("userInfo")).token
       : null;
-    setToken(getToken);
-  }, []);*/
 
-  let loginButton;
+    setToken(getToken);
+  }, []);
 
   if (token == null) {
     loginButton = (

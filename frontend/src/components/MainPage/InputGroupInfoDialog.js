@@ -15,7 +15,6 @@ function InputGroupInfoDialog() {
   const [groupName, setGroupName] = useState("");
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
-  const [roomId, setRoomId] = useState("123");
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -63,7 +62,7 @@ function InputGroupInfoDialog() {
   return (
     <div>
       <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        Open alert dialog
+        그룹 등록 
       </Button>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle id="alert-dialog-title">

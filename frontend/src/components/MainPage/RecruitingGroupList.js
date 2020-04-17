@@ -12,15 +12,15 @@ import {
 import Paper from "@material-ui/core/Paper";
 import InputGroupInfoDialog from "./InputGroupInfoDialog";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
-function RecruitingGroupList(props) {
+function RecruitingGroupList() {
   const [rows, setRows] = useState(null);
-  const [token, setToken] = useState(null);
+  const oAuthToken = useSelector(state => state.oauthTokenReducer.oAuthToken);
   let table = null;
 
   useEffect(() => {
-    //console.log(props.token);
-    if (window.sessionStorage.getItem("userInfo") != null) {
+    if (oAuthToken != null) {
       axios
         .get("http://localhost:8080/api/v1/allGroups", {
           headers: {
@@ -36,7 +36,7 @@ function RecruitingGroupList(props) {
     } else {
       setRows(null);
     }
-  }, []);
+  }, [oAuthToken]);
 
   if (rows == null) {
     table = (
