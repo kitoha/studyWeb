@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import {
   Typography,
   TextField,
@@ -9,6 +9,8 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import * as Actions from "../modules/OauthTokenReducer";
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -22,10 +24,14 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function SignIn(props) {
+const SignIn = props => {
   const classes = useStyles();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+  const onSignIn = useCallback(Token => dispatch(Actions.login(Token)), [
+    dispatch
+  ]);
 
   const onChangeEmail = e => {
     setEmail(e.target.value);
@@ -33,23 +39,6 @@ function SignIn(props) {
 
   const onChangePassword = e => {
     setPassword(e.target.value);
-  };
-
-  const testButton = () => {
-    axios
-      .get("http://localhost:8080/test", {
-        headers: {
-          Authorization:
-            "Bearer " +
-            "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTg1NDU3NTE3LCJleHAiOjE1ODYwNTc1MTd9.igJxnxIZxneVKdSZWmDg8u-QitBAXN8TwVmXshfuiOSQ-5N8WSug1l8huqYNbNRAfmELEnBKryXs-5Mw8MPZkw"
-        }
-      })
-      .then(response => {
-        console.log("success");
-      })
-      .catch(error => {
-        console.log("error");
-      });
   };
 
   const submitLogin = () => {
@@ -60,22 +49,22 @@ function SignIn(props) {
         password: password
       })
       .then(response => {
-        console.log("success login");
-        console.log(response.data.accessToken);
-        localStorage.setItem(
+        window.sessionStorage.setItem(
           "userInfo",
           JSON.stringify({
             email: email,
             token: response.data.accessToken
           })
         );
-
+        console.log(response.data.accessToken);
+        onSignIn(response.data.accessToken);
         props.history.push("/");
       })
       .catch(error => {
-        console.log("error");
+        console.log(error);
       });
   };
+
   return (
     <Grid container>
       <Grid item={true} xs={false} sm={4} md={7}>
@@ -140,21 +129,10 @@ function SignIn(props) {
               </Link>
             </Grid>
           </Grid>
-
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-            onClick={testButton}
-          >
-            test
-          </Button>
         </div>
       </Grid>
     </Grid>
   );
-}
+};
 
 export default SignIn;

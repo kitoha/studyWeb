@@ -26,7 +26,7 @@ function MainPage() {
             key="1"
             post={posts[0]}
           ></ParticipatingGroupList>
-          <RecruitingGroupList key="2" post={posts[1]}></RecruitingGroupList>
+          <RecruitingGroupList key="2"></RecruitingGroupList>
         </Grid>
         <ProblemKindCards></ProblemKindCards>
       </Container>

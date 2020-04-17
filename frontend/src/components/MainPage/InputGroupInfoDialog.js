@@ -15,7 +15,6 @@ function InputGroupInfoDialog() {
   const [groupName, setGroupName] = useState("");
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
-  const [roomId, setRoomId] = useState("123");
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -27,11 +26,21 @@ function InputGroupInfoDialog() {
 
   const submitGroupInfo = () => {
     axios
-      .post("http://localhost:8080/api/v2/posts", {
-        title: groupName,
-        content: title,
-        author: author
-      })
+      .post(
+        "http://localhost:8080/api/v1/posts",
+        {
+          title: groupName,
+          content: title,
+          reader: author
+        },
+        {
+          headers: {
+            Authorization:
+              "Bearer " +
+              JSON.parse(window.sessionStorage.getItem("userInfo")).token
+          }
+        }
+      )
       .then(response => {
         console.log(response.data);
         setOpen(false);
@@ -53,7 +62,7 @@ function InputGroupInfoDialog() {
   return (
     <div>
       <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        Open alert dialog
+        그룹 등록 
       </Button>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle id="alert-dialog-title">
